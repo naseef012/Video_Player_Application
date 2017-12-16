@@ -1,23 +1,34 @@
 import {Video} from './../video';
 import { Component, OnInit } from '@angular/core';
+import {VideoService} from "../video.service";
 
 @Component({
   selector: 'app-video-center',
   templateUrl: './video-center.component.html',
-  styleUrls: ['./video-center.component.css']
+  styleUrls: ['./video-center.component.css'],
+  providers: [VideoService]
 })
-export class VideoCenterComponent implements OnInit {
+export class VideoCenterComponent implements OnInit
+{
+  videos : Array<Video>;
 
-  videos : Video[] = [
-    {"_id":"1","title":"Title N","url":"url1","description":"hello description 1"},
-    {"_id":"2","title":"Title B","url":"url2","description":"hello description 2"},
-    {"_id":"3","title":"Title M","url":"url3","description":"hello description 3"},
-    {"_id":"4","title":"Title P","url":"url4","description":"hello description 4"}
-  ];
+  selectedVideo : Video;
 
-  constructor() { }
+  constructor(private _videoService : VideoService)
+  {
 
-  ngOnInit() {
   }
 
+  ngOnInit()
+  {
+    this._videoService.getVideos().subscribe(resVideoData => this.videos = resVideoData);
+  }
+  /*
+    It is called in video-center component for listening to clicks in <video-list></video-list>
+   */
+  onSelectVideo(video:any)
+  {
+    this.selectedVideo = video;
+    console.log(this.selectedVideo);
+  }
 }

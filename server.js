@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use('/api',api);
 app.get('*',(request,response)=>{
-  response.sendFile(path.join(__dirname,'dist/index.html'));
+  response.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.listen(port,function(){
