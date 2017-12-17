@@ -16,7 +16,7 @@ mongoose.connect(db, function(err){
   Getting all videos from MongoDB in Json format
 */
 router.get('/videos',function(request, response){
-  console.log('Get Request API');
+  console.log('Get Request from API');
   Video.find({})
        .exec(function(error, videos){
          if(error){
